@@ -10,16 +10,26 @@
 
 var wins = 0;
 var loss = 0;
+var pcNumber = "1";
+var guessHold = [];
+pcNumber = Math.floor(Math.random() * ( - min + 1)) + min;
 
 document.onkeyup = function(event){
     var guess = event.key;
+    guessHold.push(guess + " ");
+
 
     if(guess === pcNumber){
-        wins++
+      wins++;
+      document.getElementById("guessTracker").innerHTML = guessHold.toString();
+      document.getElementById("winCount").innerHTML = wins;
 
     }
     else{
-        loss++
+      loss++
+      document.getElementById("lossCount").innerHTML = loss;
+      document.getElementById("guessTracker").innerHTML = guessHold.toString();
+
     }
 
 
@@ -69,12 +79,14 @@ document.onkeyup = function(event){
 
 
 <h1>Welcome to the GAME.</h1>
-<h1>
-        the value for number is:
-        <script type="text/javascript">
-          document.write(wins)
-        </script>
-</h1>
+<h2>
+        
+  <p>Wins: <div id="winCount"></div></p>
+  <p>Losses: <div id="lossCount"></div></p>
+  <p>Your guesses: <div id="guessTracker"></div></p>
+        
+</h2>
+
 
   </body>
 </html>
