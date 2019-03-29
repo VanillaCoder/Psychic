@@ -10,75 +10,52 @@
 
 var wins = 0;
 var loss = 0;
-var pcNumber = "1";
+var pcNumber = 0;
 var guessHold = [];
-pcNumber = Math.floor(Math.random() * ( - min + 1)) + min;
+var pcGuess = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","Q","r","s","t","u","v","w","x","y","z"];
+var lossCount = 0;
+pcNumber = Math.floor(Math.random() * (26));
+console.log(pcGuess[pcNumber] );
 
 document.onkeyup = function(event){
     var guess = event.key;
     guessHold.push(guess + " ");
 
-
-    if(guess === pcNumber){
+    if(guess === pcGuess[pcNumber]){
       wins++;
       document.getElementById("guessTracker").innerHTML = guessHold.toString();
       document.getElementById("winCount").innerHTML = wins;
+      guessHold = [];
+      lossCount = 0;
+      pcNumber = Math.floor(Math.random() * (26));
 
+    }
+    else if(guess != pcGuess[pcNumber] && lossCount < 6){
+      console.log(pcGuess[pcNumber] );
+
+      document.getElementById("guessTracker").innerHTML = guessHold.toString();
+      lossCount++;
     }
     else{
       loss++
+      lossCount = 0;
       document.getElementById("lossCount").innerHTML = loss;
+      guessHold = [];
       document.getElementById("guessTracker").innerHTML = guessHold.toString();
+      pcNumber = Math.floor(Math.random() * (26));
 
     }
 
 
 }
 
-      var car = {
-        make: "Honda",
-        model: "Fit",
-        color: "Blue Raspberry",
-        mileage: 3000,
-        isWorking: true,
-
-        driveToWork: function() {
-
-          alert("Old Mileage: " + this.mileage);
-
-          this.mileage = this.mileage + 8;
-
-          alert("New mileage: " + this.mileage);
-        },
-
-        driveAroundWorld: function() {
-
-          alert("Old Mileage: " + this.mileage);
-
-          this.mileage = this.mileage + 24000;
-
-          alert("New Mileage: " + this.mileage);
-          alert("Car needs a tuneup!");
-
-          this.isWorking = false;
-        },
-
-        getTuneUp: function() {
-          alert("Car is ready to go!");
-          this.isWorking = true;
-        },
-
-        honk: function() {
-          alert("Honk! Honk!");
-        }
-      };
-
 
     </script>
 
 
 
-<h1>Welcome to the GAME.</h1>
+<h1>Welcome to the guessing game.</h1>
+<h2>Guess the correct letter and win. You have seven chances.</h2>
 <h2>
         
   <p>Wins: <div id="winCount"></div></p>
